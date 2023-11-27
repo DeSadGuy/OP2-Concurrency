@@ -75,9 +75,11 @@ namespace Exercise
     public class ConcurrentMergeSort
     {
         // Implements concurrent version of MergeSort.
+        
         public virtual void sortCon(int[] d)
         {
             // Todo 1: Instantiate an object of mergeSort.
+
 
             // Todo 2: Divide the main array into two pieces: left and right. Where is the middle?
 
