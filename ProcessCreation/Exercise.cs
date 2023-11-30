@@ -13,6 +13,11 @@ namespace Exercise
         {
             // Todo: Create an object from ProcessStartInfo
             // Implement your code here ...
+            Console.WriteLine("This method is going to create a process ... ");
+            Process process = new Process();
+            process.StartInfo.FileName = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+            process.StartInfo.CreateNoWindow = true;
+
 
 
             // Todo: Provide the path and the name of your executable file
@@ -26,7 +31,7 @@ namespace Exercise
             {
                 // Todo: Start your process and then wait for its exit
                 // Implement your code here
-
+                process.Start();
             }
             catch (Exception e)
             {

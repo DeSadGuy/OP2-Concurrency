@@ -1,6 +1,58 @@
 {
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "ProcessCreation",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/ProcessCreation/bin/Debug/net6.0/ProcessCreation.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ProcessCreation",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+
+        },
+        {
+            "name": "IPCNamedClient",
+            "type": "coreclr",
+            "request": "launch",
+
+            "program": "${workspaceFolder}/bin/Debug/net6.0/IPCNamedClient.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/IPCNamedClient",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "DiningPhilosophers",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Debug/net6.0/DiningPhilosophers.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/DiningPhilosophers",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Asynchronous",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Debug/net6.0/Asynchronous.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Asynchronous",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Processes",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/Processes/bin/Debug/net6.0/Processes.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Processes",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
         
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
@@ -9,7 +61,6 @@
             "name": "MergeSort",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/MergeSort/bin/Debug/net6.0/MergeSort.dll",
             "args": [],
