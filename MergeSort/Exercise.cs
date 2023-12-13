@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Threading;
+using Program;
 
 namespace Exercise
 {
@@ -22,13 +24,14 @@ namespace Exercise
  
         public void sortSeq(int left, int right)
         {
+            
             if (left < right)
             {
                 int middle = (left + right) / 2;
 
                 sortSeq(left, middle);
                 sortSeq(middle + 1, right);
-
+                Thread.Sleep(1000);
                 merge(left, middle, right);
             }
         }
@@ -75,11 +78,33 @@ namespace Exercise
     public class ConcurrentMergeSort
     {
         // Implements concurrent version of MergeSort.
-        
-        public virtual void sortCon(int[] d)
+        int[] array;
+
+        public ConcurrentMergeSort(int[] data)
+        {
+            array = new int[data.Length];
+            Array.Copy(data, array, data.Length);
+        }
+
+        public virtual void sortCon(int start, int end)
         {
             // Todo 1: Instantiate an object of mergeSort.
+            if (start < end)
+            {
+                
+                int middle = (start + end) / 2;
 
+                Thread thread1 = new Thread(() => sortCon(start, middle));
+                Thread thread2 = new Thread(() => sortCon(middle + 1, end));
+
+                thread1.Start();
+                thread2.Start();
+
+                thread1.Join();
+                thread2.Join();
+                Thread.Sleep(1000);
+                merge(start, middle, end);
+            }
 
             // Todo 2: Divide the main array into two pieces: left and right. Where is the middle?
 
@@ -89,7 +114,64 @@ namespace Exercise
 
             // Todo 5: Join to the working threads.
 
+
             // Todo 6: Merge the results to create the complete sorted array. Then print the content
+
+        }
+        public void merge(int left, int middle, int right)
+        {
+            int leftlength = middle - left + 1;
+            int rightlength = right - middle;
+
+            int[] leftArray = new int[leftlength];
+            int[] rightArray = new int[rightlength];
+
+            // Array.Copy(OG array , OG index, destination array, start index, length)) 
+            Array.Copy(array, left, leftArray, 0, leftlength);
+            Array.Copy(array, middle + 1, rightArray, 0, rightlength);
+
+            int i = 0, j = 0;
+            int k = left;
+
+        // check if somethhing in array
+        while (i < leftlength && j < rightlength)
+        {
+            // Compare 2 arrays values 
+            if (leftArray[i] <= rightArray[j])
+            {
+                array[k] = leftArray[i];
+                i++;
+            }
+            else
+            {
+                array[k] = rightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy the remaining elements of leftArray[], if any
+        while (i < leftlength)
+        {
+            array[k] = leftArray[i];
+            i++;
+            k++;
+        }
+
+        // Copy the remaining elements of rightArray[], if any
+        while (j < rightlength)
+        {
+            array[k] = rightArray[j];
+            j++;
+            k++;
+        }
+
+        }
+        public void printContent(String msg)
+        {
+            Console.WriteLine(msg + "Content of the array is:");
+            for (int i = 0; i < array.Length; i++)
+                Console.Write("data[{0}]={1} ;", i, array[i]);
         }
 
     }

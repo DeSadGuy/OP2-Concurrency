@@ -68,7 +68,11 @@ After that, modify your program such that executes the **Processes** (try to run
 	1. Read and analyse the programs for both client and server. What do you expect from the behaviour of these programs?
 	2. Run the server, run the client. Check the behaviour.
 	3. Run one server and two clients. Does the server communicate with both clients?
+   ***the client will say that the pipe is already in use and crash with that execption*** 
 	4. What will happen if the name of the pipe in the server is different from the client? Change the name of the pipe in the server (or the client). Re-run both the client and server. Can they communicate? 
+   ***cannot communicate because the pipe name is different, they will wait until the pipe is connected what never is going to happen***
+
+   ***Something to do:***
 	5. Named pipes are meant for programs where two-way communication is needed. The current implementation provides only one-way communication (from the server to the client). Extend the programs such that the client sends the result of its processing (i.e. reversed message) back to the server. The server will print the result received from the client.
 <!-- Solution: Is available. -->
 
