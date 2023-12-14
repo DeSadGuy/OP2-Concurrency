@@ -11,6 +11,7 @@ namespace Exercise
     {
         public LinkedList<PCInformation> buffer;
         public Object mutexObj;
+        public Object mutexObj2;
 
         public int minTime { get; set; }
         public int maxTime { get; set; }
@@ -19,6 +20,7 @@ namespace Exercise
         {
             buffer = new LinkedList<PCInformation>();
             mutexObj = new object();
+            mutexObj2 = new object();
         }
 
         // one instance of producer and one instance of consumer are working sequentially
@@ -27,7 +29,7 @@ namespace Exercise
             int iterations = 100;
             Console.Out.WriteLine("[Sequential Simulator] is going to start ....");
             Producer p = new Producer(this.minTime, this.maxTime, this.buffer, this.mutexObj);
-            Consumer c = new Consumer(this.minTime, this.maxTime, this.buffer, this.mutexObj);
+            Consumer c = new Consumer(this.minTime, this.maxTime, this.buffer, this.mutexObj2);
 
             for (int i = 0; i < iterations; i++)
             {
@@ -45,7 +47,7 @@ namespace Exercise
 
             Console.Out.WriteLine("[Concurrent Simulator] is going to start ....");
             Producer p = new Producer(this.minTime, this.maxTime, this.buffer, this.mutexObj);
-            Consumer c = new Consumer(this.minTime, this.maxTime, this.buffer, this.mutexObj);
+            Consumer c = new Consumer(this.minTime, this.maxTime, this.buffer, this.mutexObj2);
 
             Thread producerThread = new Thread(() => p.MultiProduce(iterations));
             Thread consumerThread = new Thread(() => c.MultiConsume(iterations));
@@ -68,18 +70,19 @@ namespace Exercise
         // one instance of producer and one instance of consumer are working concurrently: each can produce / consume multiple items
         public void concurrentMultiProducerMultiConsumer(int iterations, int numOfProCons)
         {
+            int iterationsPerProCon = iterations / numOfProCons;
 
             Console.Out.WriteLine("[Concurrent Simulator] is going to start ....");
             Producer p = new Producer(this.minTime, this.maxTime, this.buffer, this.mutexObj);
-            Consumer c = new Consumer(this.minTime, this.maxTime, this.buffer, this.mutexObj);
+            Consumer c = new Consumer(this.minTime, this.maxTime, this.buffer, this.mutexObj2);
 
 
             Thread[] producerThreads = new Thread[numOfProCons];
             Thread[] consumerThreads = new Thread[numOfProCons];
             for(int i=0; i< numOfProCons; i++)
             {
-                producerThreads[i] = new Thread(() => p.MultiProduce(iterations));
-                consumerThreads[i] = new Thread(() => c.MultiConsume(iterations));
+                producerThreads[i] = new Thread(() => p.MultiProduce(iterationsPerProCon));
+                consumerThreads[i] = new Thread(() => c.MultiConsume(iterationsPerProCon));
             }
 
             for (int i = 0; i < numOfProCons; i++)

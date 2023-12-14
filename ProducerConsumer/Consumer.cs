@@ -28,25 +28,31 @@ namespace Exercise
 
             PCInformation data;
 
-            while (true){
-                if (buffer.Count > 0)
+            while (true)
             {
-                data = buffer.First.Value;
-                lock (mutex){
-                    buffer.RemoveFirst(); // an item is removed from the beginning of the list
+
+                if (buffer.Count > 0)
+                {
+                    data = buffer.First.Value;
+                    lock (mutex)
+                    {
+                        buffer.RemoveFirst(); // an item is removed from the beginning of the list
+                    }
+
+
+                    Console.Out.WriteLine("[Consumer] {0} is consumed", data.dataValue.ToString());
+                    break;
                 }
-                Console.Out.WriteLine("[Consumer] {0} is consumed", data.dataValue.ToString());
-                break;
+                else
+                {
+                    Console.Out.WriteLine("[Consumer] EMPTY BUFFER");
+                    EMPTY++;
+                    Thread.Sleep(1000);
+                }
             }
-            else{
-                Console.Out.WriteLine("[Consumer] EMPTY BUFFER");
-                EMPTY++;
-                Thread.Sleep(1000);
-            }
-            }
-            
-                
-                
+
+
+
         }
 
         // as soon as there is a chance, num of items will be consumed
@@ -54,9 +60,9 @@ namespace Exercise
         {
             for (int i = 0; i < num; i++)
             {
-                    this.consume();
-                
-                
+                this.consume();
+
+
             }
 
         }

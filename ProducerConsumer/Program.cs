@@ -40,7 +40,7 @@ namespace Program
             sw3.Start();
             Console.Clear();
             Console.WriteLine("Concurrent (multiple producer multiple consumer) version ....");
-            simulator.concurrentMultiProducerMultiConsumer(n,5);
+            simulator.concurrentMultiProducerMultiConsumer(n,10);
             sw3.Stop();
             Console.WriteLine("...");
             Console.WriteLine("Sequential version: {0} ms", sw1.ElapsedMilliseconds);
