@@ -162,8 +162,13 @@ The main objectives are to protect shared resources and to practice basic concep
 2. Use the reference provided below to answer the following questions:
    Reference: [Synchronization Objects](http://www.albahari.com/threading/part2.aspx) 
    1. What are the most commonly used blocking methods in threads?
+   **mutex, lock, monitor, semaphore**
    2. What is the difference between spinning (busy waiting) and blocking? Which one is not efficient?
+   **spinning - will use CPU resources but it doenst contextswitch**
+   **blocking - will contextswitch but not waste any CPU resources**
+
    3. What is a lock? Why do we need a lock?
+   **lock is a keyword that will lock a section of code so only one thread can access it at a time**
 3. If you do not have experience with linked lists, read this tutorial to gain knowledge about linked list in C#:
    Tutorial: [Linked Lists in C#](https://www.dotnetperls.com/linkedlist) 
 
@@ -181,6 +186,8 @@ The main objectives are to protect shared resources and to practice basic concep
    
    1. Do you recognise a shared memory? 
    2. Do you need to protect the shared memory?
+
+***Exercise***   
 3. [~ 40 min ] **ProducerConsumer**: This program is a simple simulation of (sequential) producer-consumer problem. There are a number of generated data produced by the *producer*, inserted in a shared buffer (a list), and consumed by a *consumer*.
    
    1. Follow the todos in the program and run the sequential version of **ProducerConsumer**. Check the order of data producing and consuming (check the ordering of the printed value).

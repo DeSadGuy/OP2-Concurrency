@@ -27,7 +27,11 @@ namespace Exercise
 
             PCInformation data = new PCInformation();
             data.dataValue = this.item++; // or a random value like:  new Random().Next();
-            buffer.AddLast(data); // an item is added to the end of the list
+            lock (mutex)
+            {
+                buffer.AddLast(data); // an item is added to the end of the list
+            }
+            
             Console.Out.WriteLine("[Producer] {0} is inserted", data.dataValue.ToString());
         }
 
@@ -36,7 +40,10 @@ namespace Exercise
         {
             for (int i = 0; i < num; i++)
             {
-                this.produce();
+                
+                    this.produce();
+                
+                
             }
         }
     }

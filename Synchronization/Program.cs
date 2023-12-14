@@ -23,7 +23,7 @@ namespace Program
 
             Thread.Sleep(wt);
             // todo 3: uncomment this and check the final result. Is this result reliable? Why? Check the implementation.
-            //examples.countMultipleTimesConcTSafe(times, until);
+            examples.countMultipleTimesConcTSafe(times, until);
 
         }
     }

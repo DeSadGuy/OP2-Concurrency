@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Exercise
@@ -11,6 +12,7 @@ namespace Exercise
         private int maxTime { get; set; }
         private LinkedList<PCInformation> buffer;
         private Object mutex;
+        public static int EMPTY = 0;
 
         public Consumer(int min, int max, LinkedList<PCInformation> buf, Object mutex)
         {
@@ -26,14 +28,25 @@ namespace Exercise
 
             PCInformation data;
 
-            if (buffer.Count > 0)
+            while (true){
+                if (buffer.Count > 0)
             {
                 data = buffer.First.Value;
-                buffer.RemoveFirst(); // an item is removed from the beginning of the list
+                lock (mutex){
+                    buffer.RemoveFirst(); // an item is removed from the beginning of the list
+                }
                 Console.Out.WriteLine("[Consumer] {0} is consumed", data.dataValue.ToString());
+                break;
             }
-            else
+            else{
                 Console.Out.WriteLine("[Consumer] EMPTY BUFFER");
+                EMPTY++;
+                Thread.Sleep(1000);
+            }
+            }
+            
+                
+                
         }
 
         // as soon as there is a chance, num of items will be consumed
@@ -41,7 +54,9 @@ namespace Exercise
         {
             for (int i = 0; i < num; i++)
             {
-                this.consume();
+                    this.consume();
+                
+                
             }
 
         }
